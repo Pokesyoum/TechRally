@@ -1,0 +1,2 @@
+class RalliesController < ApplicationController
+end

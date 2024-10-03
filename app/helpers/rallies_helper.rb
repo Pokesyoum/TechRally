@@ -1,0 +1,2 @@
+module RalliesHelper
+end

@@ -1,0 +1,2 @@
+class Rally < ApplicationRecord
+end
