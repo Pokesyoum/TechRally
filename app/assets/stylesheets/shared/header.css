@@ -1,0 +1,15 @@
+header {
+  height: 75px;
+  width: 100vw;
+  background-color: lightskyblue;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo, .client-name {
+  font-weight: 600;
+  font: bold;
+  padding: 10px;
+  text-align: center;
+}
