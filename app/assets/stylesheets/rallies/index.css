@@ -1,0 +1,17 @@
+.index-container {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.rallies {
+  width: 50%;
+  background-color: lightgray;
+  padding: 20px;
+}
+
+.rally_item {
+  font: bold;
+  font-size: 18px;
+  font-weight: 600;
+}
