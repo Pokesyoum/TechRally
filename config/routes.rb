@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   
   root "rallies#index"
   resources :rallies
+  resources :users, only: :show
 end
