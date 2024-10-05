@@ -1,5 +1,5 @@
 .container {
-  height: calc(100vh - 75px - 75px - 100px);
+  height: calc(100vh - 75px - 50px - 100px);
   padding: 50px 0;
   display: flex;
   justify-content: center;
