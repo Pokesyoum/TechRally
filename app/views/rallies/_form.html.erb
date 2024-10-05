@@ -1,0 +1,57 @@
+<div class="form-container">
+  <%= form_with model: @rally do |form| %>
+    <div>
+      <%= form.label :タイトル, class: "form-label" %><br>
+      <%= form.text_field :title, class: "form" %>
+    </div>
+
+    <div>
+      <%= form.label :要約, class: "form-label" %><br>
+      <%= form.text_area :abstract, class: "form" %>
+    </div>
+
+    <div>
+      <%= form.label :背景, class: "form-label" %><br>
+      <%= form.text_area :background, class: "form" %>
+    </div>
+
+    <div>
+      <%= form.label :アイデア, class: "form-label" %><br>
+      <%= form.text_area :idea, class: "form" %>
+    </div>
+
+    <div>
+      <%= form.label :手法, class: "form-label" %><br>
+      <%= form.text_area :method, class: "form" %>
+    </div>
+
+    <div>
+      <%= form.label :結果, class: "form-label" %><br>
+      <%= form.text_area :result, class: "form" %>
+    </div>
+
+    <div>
+      <%= form.label :議論, class: "form-label" %><br>
+      <%= form.text_area :discussion, class: "form" %>
+    </div>
+
+    <div>
+      <%= form.label :結論, class: "form-label" %><br>
+      <%= form.text_area :conclusion, class: "form" %>
+    </div>
+
+    <div>
+      <%= form.label :意見, class: "form-label" %><br>
+      <%= form.text_area :opinion, class: "form" %>
+    </div>
+
+    <div>
+      <% if controller_name == 'rallies' && action_name == 'new' %>
+        <%= form.submit "投稿する", class: "form-submit" %>
+      <% elsif controller_name == 'rallies' && action_name == 'edit' %>
+        <%= form.submit "修正する", class: "form-submit" %>
+        <%= link_to "削除する", rally_path, class: "delete-button", data: { turbo_method: :delete } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

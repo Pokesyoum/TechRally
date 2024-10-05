@@ -1,0 +1,25 @@
+.container {
+  height: calc(100vh - 75px - 50px - 100px);
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+
+.rallies-index {
+  width: 50%;
+}
+
+.rallies {
+  background-color: lightgray;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.rally_item {
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: underline;
+  font-style: italic;
+  padding: 5px 0 10px 0;
+}
