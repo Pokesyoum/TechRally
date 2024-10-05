@@ -7,11 +7,16 @@ header {
   justify-content: space-between;
 }
 
-.logo, .client-name {
+.logo, .action-button {
   font-weight: 600;
   font: bold;
   padding: 10px;
   text-align: center;
   text-decoration: none;
   color: black;
+}
+
+.action-button {
+  background-color: lightgray;
+  margin-right: 10px;
 }
