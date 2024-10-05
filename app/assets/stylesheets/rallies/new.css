@@ -1,0 +1,16 @@
+.form-container {
+  width: 50%;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.form {
+  width: 100%;
+  margin: 5px 0 10px 0;
+}
+
+.form-submit {
+  width: 30%;
+}
