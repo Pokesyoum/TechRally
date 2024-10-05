@@ -12,4 +12,6 @@ header {
   font: bold;
   padding: 10px;
   text-align: center;
+  text-decoration: none;
+  color: black;
 }
