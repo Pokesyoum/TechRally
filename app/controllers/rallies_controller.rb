@@ -20,6 +20,10 @@ class RalliesController < ApplicationController
     @rally = Rally.find(params[:id])
   end
 
+  def edit
+    @rally = Rally.find(params[:id])
+  end
+
   private
 
   def rally_params
