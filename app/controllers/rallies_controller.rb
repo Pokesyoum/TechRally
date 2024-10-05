@@ -1,4 +1,8 @@
 class RalliesController < ApplicationController
+  before_action :set_rally, only: [:show, :edit]
+  before_action :move_to_index, except: [:index, :show]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+
   def index
     @rallies = Rally.all
   end
@@ -17,11 +21,9 @@ class RalliesController < ApplicationController
   end
 
   def show
-    @rally = Rally.find(params[:id])
   end
 
   def edit
-    @rally = Rally.find(params[:id])
   end
 
   def update
@@ -44,5 +46,15 @@ class RalliesController < ApplicationController
   def rally_params
     params.require(:rally).permit(:title, :abstract, :background, :idea, :method, :result,
                                   :discussion, :conclusion, :opinion).merge(user_id: current_user.id)
+  end
+
+  def set_rally
+    @rally = Rally.find(params[:id])
+  end
+
+  def move_to_index
+    return if user_signed_in?
+
+    redirect_to action: :index
   end
 end
