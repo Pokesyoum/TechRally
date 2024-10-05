@@ -46,7 +46,12 @@
     </div>
 
     <div>
-      <%= form.submit "投稿する", class: "form-submit" %>
+      <% if controller_name == 'rallies' && action_name == 'new' %>
+        <%= form.submit "投稿する", class: "form-submit" %>
+      <% elsif controller_name == 'rallies' && action_name == 'edit' %>
+        <%= form.submit "修正する", class: "form-submit" %>
+        <%= link_to "削除する", rally_path, class: "delete-button", data: { turbo_method: :delete } %>
+      <% end %>
     </div>
   <% end %>
 </div>

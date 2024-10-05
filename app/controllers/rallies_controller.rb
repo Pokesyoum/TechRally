@@ -33,6 +33,12 @@ class RalliesController < ApplicationController
     end
   end
 
+  def destroy
+    rally = Rally.find(params[:id])
+    rally.destroy
+    redirect_to root_path
+  end
+
   private
 
   def rally_params
