@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_02_114416) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_05_234101) do
+  create_table "comments", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "rally_id", null: false
+    t.string "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rally_id"], name: "index_comments_on_rally_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "rallies", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title", null: false
