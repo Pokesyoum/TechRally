@@ -1,5 +1,27 @@
 .container {
-  height: calc(100vh - 75px - 50px - 100px);
+  height: calc(100vh - 75px - 50px);
+  display: flex;
+}
+
+.side-bar {
+  width: 15%;
+  height: 100%;
+  background-color: lightcyan;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-items {
+  width: 100%;
+  padding: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+}
+
+.index-container {
+  width: 85%;
+  height: calc(100% - 100px);
   padding: 50px 0;
   display: flex;
   justify-content: center;
@@ -7,7 +29,7 @@
 }
 
 .rallies-index {
-  width: 50%;
+  width: 80%;
 }
 
 .rallies {
