@@ -1,18 +1,6 @@
 <div class="container">
 
-  <div class="side-bar">
-    <ul>
-      <li class="menu-items">
-        <%= link_to "マイページ", user_path(@user), class: "menu-items" %>
-      </li>
-      <li class="menu-items">
-        <%= link_to "ミッション", "#", class: "menu-items" %>
-      </li>
-      <li class="menu-items">
-        <%= link_to "ランキング", "#", class: "menu-items" %>
-      </li>
-    </ul>
-  </div>
+  <%= render "layouts/sidebar" %>
 
   <div class="index-container">
     <div class="rallies-index" >

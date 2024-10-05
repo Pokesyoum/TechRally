@@ -1,5 +1,14 @@
 .form-container {
-  width: 50%;
+  width: 85%;
+  height: calc(100% - 100px);
+  display: flex;
+  justify-content: center;
+  overflow: scroll;
+  padding: 50px;
+}
+
+.form-sub-container {
+  width: 70%;
 }
 
 .form-label {
