@@ -1,7 +1,7 @@
-<div class="index-container">
-  <div class="rallies">
-    <div>
-      <% @rallies.each do |rally| %>
+<div class="container">
+  <div class="rallies-index" >
+    <% @rallies.each do |rally| %>
+      <div class="rallies">
         <div class="rally_item">
           タイトル<br>
         </div>
@@ -26,7 +26,7 @@
         <div class="rally">
           <%= rally.user.name %>
         </div>
-       <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>

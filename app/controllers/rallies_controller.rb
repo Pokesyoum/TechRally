@@ -3,6 +3,10 @@ class RalliesController < ApplicationController
     @rallies = Rally.all
   end
 
+  def new
+    @rally = Rally.new
+  end
+
   def show
     @rally = Rally.find(params[:id])
   end
