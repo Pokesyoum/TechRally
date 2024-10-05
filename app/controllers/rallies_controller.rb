@@ -2,6 +2,7 @@ class RalliesController < ApplicationController
   before_action :set_rally, only: [:show, :edit]
   before_action :move_to_index, except: [:index, :show]
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :set_user
 
   def index
     @rallies = Rally.all
@@ -56,5 +57,9 @@ class RalliesController < ApplicationController
     return if user_signed_in?
 
     redirect_to action: :index
+  end
+
+  def set_user
+    @user = current_user
   end
 end

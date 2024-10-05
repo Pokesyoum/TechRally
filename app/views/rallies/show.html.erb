@@ -1,65 +1,70 @@
 <div class="container">
-  <div class="rallies-index">
-    <div class="rallies">
-      <div class="rally_item">
-        タイトル<br>
-      </div>
-      <div class="rally">
-        <%= @rally.title %>
-      </div>
-      <div class="rally_item">
-        要約<br>
-      </div>
-      <div class="rally">
-        <%= @rally.abstract %>
-      </div>
-      <div class="rally_item">
-        背景<br>
-      </div>
-      <div class="rally">
-        <%= @rally.background %>
-      </div>
-      <div class="rally_item">
-        アイデア<br>
-      </div>
-      <div class="rally">
-        <%= @rally.idea %>
-      </div>
-      <div class="rally_item">
-        手法<br>
-      </div>
-      <div class="rally">
-        <%= @rally.method %>
-      </div>
-      <div class="rally_item">
-        結果<br>
-      </div>
-      <div class="rally">
-        <%= @rally.result %>
-      </div>
-      <div class="rally_item">
-        議論<br>
-      </div>
-      <div class="rally">
-        <%= @rally.discussion %>
-      </div>
-      <div class="rally_item">
-        結論<br>
-      </div>
-      <div class="rally">
-        <%= @rally.conclusion %>
-      </div>
-      <div class="rally_item">
-        意見<br>
-      </div>
-      <div class="rally">
-        <%= @rally.opinion %>
-      </div>
-      <div class="rally_item">
-        投稿者<br>
-      </div>
-      <div class="rally">
-        <%= @rally.user.name %>
+
+  <%= render "layouts/sidebar" %>
+
+  <div class="index-container">
+    <div class="rallies-index">
+      <div class="rallies">
+        <div class="rally_item">
+          タイトル<br>
+        </div>
+        <div class="rally">
+          <%= @rally.title %>
+        </div>
+        <div class="rally_item">
+          要約<br>
+        </div>
+        <div class="rally">
+          <%= @rally.abstract %>
+        </div>
+        <div class="rally_item">
+          背景<br>
+        </div>
+        <div class="rally">
+          <%= @rally.background %>
+        </div>
+        <div class="rally_item">
+          アイデア<br>
+        </div>
+        <div class="rally">
+          <%= @rally.idea %>
+        </div>
+        <div class="rally_item">
+          手法<br>
+        </div>
+        <div class="rally">
+          <%= @rally.method %>
+        </div>
+        <div class="rally_item">
+          結果<br>
+        </div>
+        <div class="rally">
+          <%= @rally.result %>
+        </div>
+        <div class="rally_item">
+          議論<br>
+        </div>
+        <div class="rally">
+          <%= @rally.discussion %>
+        </div>
+        <div class="rally_item">
+          結論<br>
+        </div>
+        <div class="rally">
+          <%= @rally.conclusion %>
+        </div>
+        <div class="rally_item">
+          意見<br>
+        </div>
+        <div class="rally">
+          <%= @rally.opinion %>
+        </div>
+        <div class="rally_item">
+          投稿者<br>
+        </div>
+        <div class="rally">
+          <%= @rally.user.name %>
+        </div>
       </div>
     </div>
   </div>
