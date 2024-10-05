@@ -24,6 +24,15 @@ class RalliesController < ApplicationController
     @rally = Rally.find(params[:id])
   end
 
+  def update
+    rally = Rally.find(params[:id])
+    if rally.update(rally_params)
+      redirect_to rally_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def rally_params
