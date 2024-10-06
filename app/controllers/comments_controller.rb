@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def create
-    @comment = Comment.create(comment_params)
-    redirect_to rally_path
+    comment = Comment.create(comment_params)
+    redirect_to "/rallies/#{comment.rally.id}"
   end
 
   private

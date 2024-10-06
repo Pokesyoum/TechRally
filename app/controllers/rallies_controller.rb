@@ -22,6 +22,8 @@ class RalliesController < ApplicationController
   end
 
   def show
+    @comments = @rally.comments
+    @comment = Comment.new
   end
 
   def edit

@@ -19,7 +19,7 @@
 .rallies {
   background-color: lightgray;
   padding: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .rally_item {
@@ -28,4 +28,25 @@
   text-decoration: underline;
   font-style: italic;
   padding: 5px 0 10px 0;
+}
+
+.comments-container {
+  background-color: lightgrey;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.comments-list {
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+.comment-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.comment-content {
+  font-size: 18px;
 }
