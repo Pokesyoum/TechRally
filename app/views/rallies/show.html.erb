@@ -66,6 +66,30 @@
           <%= @rally.user.name %>
         </div>
       </div>
+
+      <div class="comments-container">
+        <div class="comments-list">コメント一覧</div>
+        <% @comments.each do |comment| %>
+          <div class="comment-items">
+            <div class="comment-content">
+              <%= comment.content %>
+            </div>
+            <div class="comment-user">
+              <%= comment.user.name %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="comment-form">
+        <%= form_with model: [@rally, @comment] do |form| %>
+          <%= form.label :コメントする, class: "form-label" %><br>
+          <%= form.text_field :content, class: "form" %><br>
+
+          <%= form.submit "投稿", class: "form-submit" %>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </div>
