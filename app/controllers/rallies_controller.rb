@@ -15,6 +15,8 @@ class RalliesController < ApplicationController
   def create
     @rally = Rally.new(rally_params)
     if @rally.save
+      mission = UserMission.find_by(user_id: current_user.id, mission_id: 1, completed: false)
+      mission.update(completed: true) if mission
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity

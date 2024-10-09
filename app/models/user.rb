@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :rallies
   has_many :comments
+  has_many :user_missions
+  has_many :missions, through: :user_missions
 end
