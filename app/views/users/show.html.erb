@@ -19,6 +19,6 @@
     <% end %>
     達成したミッション数：
     <%= UserMission.where(user_id: current_user.id, completed: true).count %><br>
-    <%= link_to "ログアウト", "#" %>
+    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
   </div>
 </div>

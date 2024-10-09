@@ -1,7 +1,7 @@
 class RalliesController < ApplicationController
   before_action :set_rally, only: [:show, :edit]
   before_action :move_to_index, except: [:index, :show]
-  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, only: [:index, :new, :edit, :destroy]
   before_action :set_user
 
   def index
