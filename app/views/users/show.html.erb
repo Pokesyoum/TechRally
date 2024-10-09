@@ -1,3 +1,24 @@
 <div class="container">
+
   <%= render "layouts/sidebar" %>
+
+  <div class="posted-rallies-container">
+    投稿したrally一覧<br>
+    <% @rallies.each do |rally| %>
+      <div class="posted-rallies">
+        <%= link_to rally.title, rally_path(rally) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mypage-box">
+    マイページ<br>
+    保有しているミッション：<br>
+    <% @user_missions.each do |user_mission| %>
+      ・<%= user_mission.mission.description %><br>
+    <% end %>
+    達成したミッション数：
+    <%= UserMission.where(user_id: current_user.id, completed: true).count %><br>
+    <%= link_to "ログアウト", "#" %>
+  </div>
 </div>

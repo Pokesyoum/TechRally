@@ -1,3 +1,4 @@
 class Mission < ApplicationRecord
-  belongs_to :user_mission
+  has_many :user_missions
+  has_many :users, through: :user_missions
 end
