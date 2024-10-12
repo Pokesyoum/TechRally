@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :comments
   has_many :user_missions
   has_many :missions, through: :user_missions
+  has_many :look_for_papers
 end
