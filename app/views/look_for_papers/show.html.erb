@@ -1,5 +1,27 @@
 <div class="container">
   <%= render "layouts/sidebar" %>
 
-  
+  <div class="look_for_papers_container">
+    <div class="look_for_paper_lists">
+      <table>
+        <thead>
+          <tr>
+            <th>探したい論文</th>
+            <th>ジャーナル</th>
+            <th>検索ワード</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @look_for_papers.each do |look_for_paper| %>
+            <tr>
+              <td><%= look_for_paper.look_for_paper %></td>
+              <td><%= look_for_paper.journal %></td>
+              <td><%= look_for_paper.search_word %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </div>
