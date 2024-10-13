@@ -16,6 +16,23 @@ th {
   background-color: #f2f2f2;
 }
 
+.look_for_papers_container {
+  width: 45%;
+}
+
 .look_for_paper_lists {
   padding: 20px;
+}
+
+.form-container-look_for_paper {
+  width: 30%;
+  height: calc(100% - 100px);
+  display: flex;
+  justify-content: center;
+  overflow: scroll;
+  padding: 50px;
+}
+
+.form-sub-container {
+  width: 70%;
 }

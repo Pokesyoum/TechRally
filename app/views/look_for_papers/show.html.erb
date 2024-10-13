@@ -22,6 +22,29 @@
         </tbody>
       </table>
     </div>
+  </div>
 
+  <div class="form-container-look_for_paper">
+    <div class="form-sub-container">
+      <%= form_with model: @look_for_paper do |form| %>
+        <div>
+          <%= form.label :探したい論文, class: "form-label" %><br>
+          <%= form.text_field :look_for_paper, class: "form" %>
+        </div>
+
+        <div>
+          <%= form.label :ジャーナル, class: "form-label" %><br>
+          <%= form.text_area :journal, class: "form" %>
+        </div>
+
+        <div>
+          <%= form.label :検索ワード, class: "form-label" %><br>
+          <%= form.text_area :search_word, class: "form" %>
+        </div>
+        <div>
+          <%= form.submit "保存する", class: "form-submit" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
