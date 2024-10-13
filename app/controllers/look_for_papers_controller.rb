@@ -7,8 +7,10 @@ class LookForPapersController < ApplicationController
 
   def create
     @user = current_user
+    mission = UserMission.find_by(user_id: current_user.id, mission_id: 3, completed: false)
     look_for_paper = LookForPaper.create(look_for_paper_params)
-    redirect_to look_for_paper_parh(@user)
+    mission.update(completed: true) if mission
+    redirect_to look_for_paper_path(@user)
   end
 
   private
