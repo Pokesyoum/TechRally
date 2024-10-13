@@ -1,7 +1,7 @@
 class LookForPapersController < ApplicationController
   def show
     @user = current_user
-    @look_for_papers = LookForPaper.where(user_id: current_user.id)
+    @look_for_papers = LookForPaper.where(user_id: current_user.id).order(created_at: :desc)
     @look_for_paper = LookForPaper.new
   end
 

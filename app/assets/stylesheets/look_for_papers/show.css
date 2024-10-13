@@ -18,6 +18,7 @@ th {
 
 .look_for_papers_container {
   width: 45%;
+  overflow: scroll;
 }
 
 .look_for_paper_lists {
@@ -29,7 +30,6 @@ th {
   height: calc(100% - 100px);
   display: flex;
   justify-content: center;
-  overflow: scroll;
   padding: 50px;
 }
 
