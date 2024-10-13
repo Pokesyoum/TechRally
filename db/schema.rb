@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_12_234152) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_13_063802) do
   create_table "comments", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "rally_id", null: false
@@ -35,6 +35,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_12_234152) do
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "paper_stocks", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "outline", null: false
+    t.string "paper_url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_paper_stocks_on_user_id"
   end
 
   create_table "rallies", charset: "utf8", force: :cascade do |t|
@@ -77,5 +86,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_12_234152) do
   end
 
   add_foreign_key "look_for_papers", "users"
+  add_foreign_key "paper_stocks", "users"
   add_foreign_key "rallies", "users"
 end
