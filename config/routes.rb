@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
   resources :users, only: :show
   resources :look_for_papers, only: [:show, :create]
+  resources :paper_stocks, only: [:show, :create]
 end

@@ -1,0 +1,44 @@
+<div class="container">
+  <%= render "layouts/sidebar" %>
+
+  <div class="look_for_papers_container">
+    <div class="look_for_paper_lists">
+      <table>
+        <thead>
+          <tr>
+            <th>論文の概要</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @paper_stocks.each do |paper_stock| %>
+            <tr>
+              <td><%= paper_stock.outline %></td>
+              <td><%= paper_stock.paper_url %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="form-container-look_for_paper">
+    <div class="form-sub-container">
+      <%= form_with model: @paper_stock do |form| %>
+        <div>
+          <%= form.label :論文の概要, class: "form-label" %><br>
+          <%= form.text_field :outline, class: "form" %>
+        </div>
+
+        <div>
+          <%= form.label :URL, class: "form-label" %><br>
+          <%= form.text_area :paper_url, class: "form" %>
+        </div>
+
+        <div>
+          <%= form.submit "保存する", class: "form-submit" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
