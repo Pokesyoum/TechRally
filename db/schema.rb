@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_06_065722) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_12_234152) do
   create_table "comments", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "rally_id", null: false
@@ -19,6 +19,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_06_065722) do
     t.datetime "updated_at", null: false
     t.index ["rally_id"], name: "index_comments_on_rally_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "look_for_papers", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "look_for_paper", null: false
+    t.string "journal"
+    t.string "search_word"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_look_for_papers_on_user_id"
   end
 
   create_table "missions", charset: "utf8", force: :cascade do |t|
@@ -66,5 +76,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_06_065722) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "look_for_papers", "users"
   add_foreign_key "rallies", "users"
 end
