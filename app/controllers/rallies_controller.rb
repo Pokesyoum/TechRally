@@ -52,6 +52,8 @@ class RalliesController < ApplicationController
     end
 
     if rally.update(rally_params)
+      mission = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
+      mission.update(completed: true) if mission
       redirect_to rally_path
     else
       render :edit, status: :unprocessable_entity
