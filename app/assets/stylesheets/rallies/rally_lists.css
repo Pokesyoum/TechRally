@@ -1,0 +1,20 @@
+.posted-rallies-container {
+  margin: 50px;
+  padding: 20px;
+  background-color: lightgray;
+  width: 40%;
+  overflow: scroll;
+}
+
+.saved-rallies-container {
+  margin: 50px;
+  padding: 20px;
+  background-color: lightgray;
+  width: 40%;
+  overflow: scroll;
+}
+
+.posted-rallies, .saved-rallies {
+  display: block;
+  padding: 10px;
+}

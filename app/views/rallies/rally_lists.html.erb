@@ -6,7 +6,20 @@
     投稿したrally一覧<br>
     <% @rallies.each do |rally| %>
       <div class="posted-rallies">
-        <%= link_to rally.title, rally_path(rally) %>
+        <% if rally.draft == 0 %>
+          <%= link_to rally.title, rally_path(rally) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="saved-rallies-container">
+    下書き<br>
+    <% @rallies.each do |rally| %>
+      <div class="saved-rallies">
+        <% if rally.draft == 1 %>
+          <%= link_to rally.title, rally_path(rally) if rally.draft %>
+        <% end %>
       </div>
     <% end %>
   </div>
