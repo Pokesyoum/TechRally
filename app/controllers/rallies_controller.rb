@@ -66,6 +66,9 @@ class RalliesController < ApplicationController
     redirect_to root_path
   end
 
+  def ranking
+  end
+
   private
 
   def rally_params
