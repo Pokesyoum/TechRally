@@ -17,12 +17,12 @@
     <div class="saved-rallies-container">
       <div class="word-and-button">
         <div class="item-category">下書き</div>
-        <%= link_to "新規投稿", new_rally_path %>
+        <%= link_to "新規投稿", new_rally_path, class: "button" %>
       </div>
       <% @rallies.each do |rally| %>
         <div class="saved-rallies">
           <% if rally.draft == 1 %>
-            <%= link_to rally.title, rally_path(rally) if rally.draft %>
+            <%= link_to rally.title, rally_path(rally) %>
           <% end %>
         </div>
       <% end %>
