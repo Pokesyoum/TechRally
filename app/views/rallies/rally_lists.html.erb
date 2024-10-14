@@ -1,0 +1,31 @@
+<div class="container">
+
+  <%= render "layouts/sidebar" %>
+
+  <div class="rally_lists-container">
+    <div class="posted-rallies-container">
+      <div class="item-category">投稿したrally一覧</div>
+      <% @rallies.each do |rally| %>
+        <div class="posted-rallies">
+          <% if rally.draft == false %>
+            <%= link_to rally.title, rally_path(rally) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="saved-rallies-container">
+      <div class="word-and-button">
+        <div class="item-category">下書き</div>
+        <%= link_to "新規投稿", new_rally_path, class: "button" %>
+      </div>
+      <% @rallies.each do |rally| %>
+        <div class="saved-rallies">
+          <% if rally.draft == true %>
+            <%= link_to rally.title, edit_rally_path(rally) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

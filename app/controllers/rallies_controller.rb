@@ -5,7 +5,11 @@ class RalliesController < ApplicationController
   before_action :set_user
 
   def index
-    @rallies = Rally.all
+    @rallies = Rally.where(draft: false).order(created_at: :desc)
+  end
+
+  def rally_lists
+    @rallies = @user.rallies
   end
 
   def new
@@ -14,6 +18,13 @@ class RalliesController < ApplicationController
 
   def create
     @rally = Rally.new(rally_params)
+
+    if params[:save_as_draft]
+      params[:rally][:draft] = 1
+    elsif params[:publish]
+      params[:rally][:draft] = 0
+    end
+
     if @rally.save
       mission = UserMission.find_by(user_id: current_user.id, mission_id: 1, completed: false)
       mission.update(completed: true) if mission
@@ -33,7 +44,16 @@ class RalliesController < ApplicationController
 
   def update
     rally = Rally.find(params[:id])
+
+    if params[:save_as_draft]
+      params[:rally][:draft] = 1
+    elsif params[:publish]
+      params[:rally][:draft] = 0
+    end
+
     if rally.update(rally_params)
+      mission = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
+      mission.update(completed: true) if mission
       redirect_to rally_path
     else
       render :edit, status: :unprocessable_entity
@@ -50,7 +70,7 @@ class RalliesController < ApplicationController
 
   def rally_params
     params.require(:rally).permit(:title, :abstract, :background, :idea, :method, :result,
-                                  :discussion, :conclusion, :opinion).merge(user_id: current_user.id)
+                                  :discussion, :conclusion, :opinion, :draft, :url).merge(user_id: current_user.id)
   end
 
   def set_rally
