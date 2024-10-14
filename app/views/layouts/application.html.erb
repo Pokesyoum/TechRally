@@ -15,9 +15,7 @@
       <%= link_to "Tech-Rally", root_path, class: "logo" %>
       <div class="nav-buttton">
         <% if user_signed_in? %>
-          <% if controller_name == 'rallies' && action_name == 'index' %>
-            <%= link_to "投稿する", new_rally_path, class: "action-button" %>
-          <% elsif controller_name == 'rallies' && action_name == 'show' %>
+          <% if controller_name == 'rallies' && action_name == 'show' %>
             <%= link_to "編集する", edit_rally_path, class: "action-button" %>
           <% end %>
         <% end %>
