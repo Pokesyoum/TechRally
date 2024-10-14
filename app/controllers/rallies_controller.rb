@@ -18,6 +18,13 @@ class RalliesController < ApplicationController
 
   def create
     @rally = Rally.new(rally_params)
+
+    if params[:save_as_draft]
+      params[:rally][:draft] = 1
+    elsif params[:publish]
+      params[:rally][:draft] = 0
+    end
+
     if @rally.save
       mission = UserMission.find_by(user_id: current_user.id, mission_id: 1, completed: false)
       mission.update(completed: true) if mission
