@@ -22,7 +22,7 @@
       <% @rallies.each do |rally| %>
         <div class="saved-rallies">
           <% if rally.draft == 1 %>
-            <%= link_to rally.title, rally_path(rally) %>
+            <%= link_to rally.title, edit_rally_path(rally) %>
           <% end %>
         </div>
       <% end %>
