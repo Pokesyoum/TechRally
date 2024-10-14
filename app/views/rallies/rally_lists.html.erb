@@ -2,25 +2,30 @@
 
   <%= render "layouts/sidebar" %>
 
-  <div class="posted-rallies-container">
-    投稿したrally一覧<br>
-    <% @rallies.each do |rally| %>
-      <div class="posted-rallies">
-        <% if rally.draft == 0 %>
-          <%= link_to rally.title, rally_path(rally) %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <div class="rally_lists-container">
+    <div class="posted-rallies-container">
+      <div class="item-category">投稿したrally一覧</div>
+      <% @rallies.each do |rally| %>
+        <div class="posted-rallies">
+          <% if rally.draft == 0 %>
+            <%= link_to rally.title, rally_path(rally) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
-  <div class="saved-rallies-container">
-    下書き<br>
-    <% @rallies.each do |rally| %>
-      <div class="saved-rallies">
-        <% if rally.draft == 1 %>
-          <%= link_to rally.title, rally_path(rally) if rally.draft %>
-        <% end %>
+    <div class="saved-rallies-container">
+      <div class="word-and-button">
+        <div class="item-category">下書き</div>
+        <%= link_to "新規投稿", new_rally_path %>
       </div>
-    <% end %>
+      <% @rallies.each do |rally| %>
+        <div class="saved-rallies">
+          <% if rally.draft == 1 %>
+            <%= link_to rally.title, rally_path(rally) if rally.draft %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -1,13 +1,28 @@
+.rally_lists-container {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .posted-rallies-container {
-  margin: 50px;
+  margin: 50px 25px 50px 50px;
   padding: 20px;
   background-color: lightgray;
   width: 40%;
   overflow: scroll;
 }
 
+.word-and-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-category {
+  font-weight: 600;
+}
+
 .saved-rallies-container {
-  margin: 50px;
+  margin: 50px 50px 50px 25px;
   padding: 20px;
   background-color: lightgray;
   width: 40%;
