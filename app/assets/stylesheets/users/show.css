@@ -1,19 +1,13 @@
-.posted-rallies-container {
-  margin: 50px;
-  padding: 20px;
-  background-color: lightgray;
-  width: 40%;
-  overflow: scroll;
-}
-
-.posted-rallies {
-  display: block;
-  padding: 10px;
-}
-
 .mypage-box {
   width: 30%;
   margin: 5px;
   padding: 20px;
-  border-left: 1px solid lightgray;
+}
+
+.logout-button {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  background-color: lightgray;
+  padding: 10px;
 }
