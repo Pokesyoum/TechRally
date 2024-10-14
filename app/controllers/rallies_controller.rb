@@ -8,6 +8,10 @@ class RalliesController < ApplicationController
     @rallies = Rally.all
   end
 
+  def rally_lists
+    @rallies = @user.rallies
+  end
+
   def new
     @rally = Rally.new
   end

@@ -1,0 +1,13 @@
+<div class="container">
+
+  <%= render "layouts/sidebar" %>
+
+  <div class="posted-rallies-container">
+    投稿したrally一覧<br>
+    <% @rallies.each do |rally| %>
+      <div class="posted-rallies">
+        <%= link_to rally.title, rally_path(rally) %>
+      </div>
+    <% end %>
+  </div>
+</div>
