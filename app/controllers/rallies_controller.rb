@@ -37,6 +37,13 @@ class RalliesController < ApplicationController
 
   def update
     rally = Rally.find(params[:id])
+
+    if params[:save_as_draft]
+      params[:rally][:draft] = 1
+    elsif params[:publish]
+      params[:rally][:draft] = 0
+    end
+
     if rally.update(rally_params)
       redirect_to rally_path
     else
@@ -54,7 +61,7 @@ class RalliesController < ApplicationController
 
   def rally_params
     params.require(:rally).permit(:title, :abstract, :background, :idea, :method, :result,
-                                  :discussion, :conclusion, :opinion).merge(user_id: current_user.id)
+                                  :discussion, :conclusion, :opinion, :draft, :url).merge(user_id: current_user.id)
   end
 
   def set_rally

@@ -7,7 +7,7 @@
       <div class="item-category">投稿したrally一覧</div>
       <% @rallies.each do |rally| %>
         <div class="posted-rallies">
-          <% if rally.draft == 0 %>
+          <% if rally.draft == false %>
             <%= link_to rally.title, rally_path(rally) %>
           <% end %>
         </div>
@@ -21,7 +21,7 @@
       </div>
       <% @rallies.each do |rally| %>
         <div class="saved-rallies">
-          <% if rally.draft == 1 %>
+          <% if rally.draft == true %>
             <%= link_to rally.title, edit_rally_path(rally) %>
           <% end %>
         </div>
