@@ -5,7 +5,7 @@ class RalliesController < ApplicationController
   before_action :set_user
 
   def index
-    @rallies = Rally.all
+    @rallies = Rally.where(draft: false).order(created_at: :desc)
   end
 
   def rally_lists
