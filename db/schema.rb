@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_13_063802) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_14_000952) do
   create_table "comments", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "rally_id", null: false
@@ -59,6 +59,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_13_063802) do
     t.text "opinion", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "draft", default: true, null: false
+    t.string "url", null: false
     t.index ["user_id"], name: "index_rallies_on_user_id"
   end
 
