@@ -50,7 +50,7 @@
         <%= form.label :URL, class: "form-label" %><br>
         <%= form.text_area :url, class: "form" %>
       </div>
-
+      <div class="submit-buttons">
         <%= form.submit "投稿する", name: "publish", class: "form-submit" %>
         <%= form.submit "保存する", name: "save_as_draft", class: "form-submit" %>
         <% if controller_name == 'rallies' && action_name == 'edit' %>
