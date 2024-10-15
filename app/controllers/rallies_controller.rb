@@ -67,6 +67,15 @@ class RalliesController < ApplicationController
   end
 
   def ranking
+    @rally_top_users = Rally.select('user_id, COUNT(user_id) AS user_count')
+                            .group(:user_id)
+                            .order('user_count DESC')
+                            .limit(3)
+    @monthly_rally_top_users = Rally.select('user_id, COUNT(user_id) AS user_count')
+                                    .where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_month, Time.now.end_of_month)
+                                    .group(:user_id)
+                                    .order('user_count DESC')
+                                    .limit(3)
   end
 
   private

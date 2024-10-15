@@ -3,5 +3,21 @@
   <%= render "layouts/sidebar" %>
 
   <div class="ranking-container">
+    <div class="ranking">
+      <div class="total-ranking">
+        <h3>トータルランキング</h3>
+          <% @rally_top_users.each_with_index do |user, index| %>
+            　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, 投稿したRally数: <%= user.user_count %>
+          <% end %>
+      </div>
+      <div class="monthly-ranking">
+        <h3>月間ランキング</h3>
+        <% @monthly_rally_top_users.each_with_index do |user, index| %>
+            　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, 投稿したRally数: <%= user.user_count %>
+          <% end %>
+      </div>
+    </div>
+    <div class="ranking"></div>
+    <div class="ranking"></div>
   </div>
 </div>
