@@ -20,7 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 1.day, at: '00:00 am' do
-  runner "User.with_few_missions"
   runner "User.assign_missions"
-  runner "assign_new_mission"
 end

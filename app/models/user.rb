@@ -17,7 +17,11 @@ class User < ApplicationRecord
       .having('COUNT(user_missions.id) <= ?', limit)
   end
 
-  def self.assign_missions(mission_id)
+  def assign_new_mission(mission_id)
+    user_missions.create(mission_id:, completed: false)
+  end
+
+  def self.assign_missions
     with_few_missions.each do |user|
       available_mission_ids = (1..5).to_a - user.mission_ids
       next if available_mission_ids.empty?
@@ -25,9 +29,5 @@ class User < ApplicationRecord
       mission_id = available_mission_ids.sample
       user.assign_new_mission(mission_id)
     end
-  end
-
-  def assign_new_mission(mission_id)
-    user_missions.create(mission_id:, completed: false)
   end
 end
