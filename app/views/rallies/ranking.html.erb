@@ -5,19 +5,48 @@
   <div class="ranking-container">
     <div class="ranking">
       <div class="total-ranking">
-        <h3>トータルランキング</h3>
-          <% @rally_top_users.each_with_index do |user, index| %>
-            　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, 投稿したRally数: <%= user.user_count %>
-          <% end %>
+        <h4>Rally投稿王</h4>
+        <h3>累計ランキング</h3>
+        <% @rally_top_users.each_with_index do |user, index| %>
+          　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, 投稿したRally数: <%= user.user_count %>
+        <% end %>
       </div>
       <div class="monthly-ranking">
         <h3>月間ランキング</h3>
         <% @monthly_rally_top_users.each_with_index do |user, index| %>
-            　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, 投稿したRally数: <%= user.user_count %>
-          <% end %>
+          　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, 投稿したRally数: <%= user.user_count %>
+        <% end %>
       </div>
     </div>
-    <div class="ranking"></div>
-    <div class="ranking"></div>
+    <div class="ranking">
+      <div class="total-ranking">
+        <h4>コメント王</h4>
+        <h3>累計ランキング</h3>
+        <% @comment_top_users.each_with_index do |user, index| %>
+          　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, コメント数: <%= user.user_count %>
+        <% end %>
+      </div>
+      <div class="monthly-ranking">
+        <h3>月間ランキング</h3>
+        <% @monthly_comment_top_users.each_with_index do |user, index| %>
+          　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, コメント数: <%= user.user_count %>
+        <% end %>
+      </div>
+    </div>
+    <div class="ranking">
+      <div class="total-ranking">
+        <h4>ミッション達成王</h4>
+        <h3>累計ランキング</h3>
+        <% @mission_top_users.each_with_index do |user, index| %>
+          　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, 達成したミッション数: <%= user.user_count %>
+        <% end %>
+      </div>
+      <div class="monthly-ranking">
+        <h3>月間ランキング</h3>
+        <% @monthly_mission_top_users.each_with_index do |user, index| %>
+          　<%= index + 1 %>位: <%= User.find_by(id: user.user_id).name %>, 達成したミッション数: <%= user.user_count %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
