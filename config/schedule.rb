@@ -19,6 +19,13 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :environment, 'development'
+set :output, 'log/cron.log'
+
+env :PATH, ENV['PATH']
+env :GEM_HOME, ENV['GEM_HOME']
+env :GEM_PATH, ENV['GEM_PATH']
+
 every 1.day, at: '00:00 am' do
   runner "User.assign_missions"
 end
