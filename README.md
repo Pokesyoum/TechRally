@@ -49,10 +49,7 @@ Rally：論文の要約などをユーザーがまとめたもの
 ・ユーザーにミッションを毎日配布する機能
 
 # データベース設計
-
-
-# 画面遷移図
-
+![alt text](database.png)
 
 # 開発環境
 ・バックエンド：Ruby on Rails, PostgreSQL<br>
