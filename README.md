@@ -60,10 +60,10 @@ Rally：論文の要約などをユーザーがまとめたもの
 
 # ローカルでの動作方法
 以下のコマンドを順に実行。
-% git clone https://github.com/Pokesyoum/TechRally
-% cd TechRally
-% bundle install
-% rails db:create
+% git clone https://github.com/Pokesyoum/TechRally<br>
+% cd TechRally<br>
+% bundle install<br>
+% rails db:create<br>
 % rails db:migrate
 
 # 工夫したポイント
