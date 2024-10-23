@@ -59,7 +59,7 @@ Rally：論文の要約などをユーザーがまとめたもの
 ・テキストエディタ：Visual Studio Code
 
 # ローカルでの動作方法
-以下のコマンドを順に実行。
+以下のコマンドを順に実行。<br>
 % git clone https://github.com/Pokesyoum/TechRally<br>
 % cd TechRally<br>
 % bundle install<br>
