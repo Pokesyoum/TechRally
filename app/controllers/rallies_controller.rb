@@ -8,10 +8,6 @@ class RalliesController < ApplicationController
     @rallies = Rally.where(draft: false).order(created_at: :desc)
   end
 
-  def rally_lists
-    @rallies = @user.rallies
-  end
-
   def new
     @rally = Rally.new
   end
@@ -22,7 +18,7 @@ class RalliesController < ApplicationController
     elsif params[:publish]
       params[:rally][:draft] = false
     end
-    
+
     @rally = Rally.new(rally_params)
 
     if @rally.save
@@ -64,6 +60,10 @@ class RalliesController < ApplicationController
     rally = Rally.find(params[:id])
     rally.destroy
     redirect_to root_path
+  end
+
+  def rally_lists
+    @rallies = @user.rallies
   end
 
   def ranking
