@@ -1,0 +1,15 @@
+.devise-container {
+  height: calc(100vh - 75px - 50px);
+}
+
+.devise-items {
+  padding: 10px;
+}
+
+.field {
+  padding: 5px;
+}
+
+.actions {
+  padding: 5px;
+}
