@@ -1,5 +1,6 @@
 .devise-container {
   height: calc(100vh - 75px - 50px);
+  display: flex;
 }
 
 .devise-items {
