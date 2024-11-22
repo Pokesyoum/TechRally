@@ -1,6 +1,6 @@
 class RalliesController < ApplicationController
   before_action :set_rally, only: [:show, :edit]
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, only: :edit
   before_action :authenticate_user!, only: [:index, :new, :edit, :destroy]
   before_action :set_user
 
@@ -109,7 +109,7 @@ class RalliesController < ApplicationController
   end
 
   def move_to_index
-    return if user_signed_in?
+    return unless current_user.id != @rally.user.id
 
     redirect_to action: :index
   end

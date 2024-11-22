@@ -14,8 +14,8 @@
     <header>
       <%= link_to "Tech-Rally", root_path, class: "logo" %>
       <div class="nav-buttton">
-        <% if user_signed_in? %>
-          <% if controller_name == 'rallies' && action_name == 'show' %>
+        <% if controller_name == 'rallies' && action_name == 'show' %>
+          <% if current_user.id == @rally.user.id %>
             <%= link_to "編集する", edit_rally_path, class: "action-button" %>
           <% end %>
         <% end %>
