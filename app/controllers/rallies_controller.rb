@@ -1,6 +1,6 @@
 class RalliesController < ApplicationController
   before_action :set_rally, only: [:show, :edit]
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, only: :edit
   before_action :authenticate_user!, only: [:index, :new, :edit, :destroy]
   before_action :set_user
 
@@ -39,7 +39,7 @@ class RalliesController < ApplicationController
   end
 
   def update
-    rally = Rally.find(params[:id])
+    @rally = Rally.find(params[:id])
 
     if params[:save_as_draft]
       params[:rally][:draft] = true
@@ -47,7 +47,7 @@ class RalliesController < ApplicationController
       params[:rally][:draft] = false
     end
 
-    if rally.update(rally_params)
+    if @rally.update(rally_params)
       mission = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
       mission.update(completed: true) if mission
       redirect_to rally_lists_rallies_path
@@ -109,7 +109,7 @@ class RalliesController < ApplicationController
   end
 
   def move_to_index
-    return if user_signed_in?
+    return unless current_user.id != @rally.user.id
 
     redirect_to action: :index
   end
