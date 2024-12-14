@@ -4,6 +4,8 @@ RSpec.describe '投稿機能', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @rally = FactoryBot.build(:rally, user_id: @user.id)
+    @user_mission1 = UserMission.create(user_id: @user.id, mission_id: 1, completed: false)
+    @user_mission5 = UserMission.create(user_id: @user.id, mission_id: 5, completed: false)
   end
 
   describe '新規作成' do
@@ -56,6 +58,100 @@ RSpec.describe '投稿機能', type: :system do
         expect(page).to have_current_path(new_rally_path)
       end
     end
+    describe 'ミッション機能-1' do
+      context 'ミッション達成されるとき' do
+        it 'Rallyが投稿されるとミッション1が達成される' do
+          sign_in(@user)
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission1.mission.description)
+          find('a', text: '投稿する').click
+          find('a', text: '新規投稿').click
+          fill_in 'rally_title', with: @rally.title
+          fill_in 'rally_abstract', with: @rally.abstract
+          fill_in 'rally_conclusion', with: @rally.conclusion
+          fill_in 'rally_opinion', with: @rally.opinion
+          fill_in 'rally_url', with: @rally.url
+          find('input[name="publish"]').click
+          find('a', text: 'マイページ').click
+          expect(page).to have_no_content(@user_mission1.mission.description)
+        end
+      end
+      context 'ミッション達成されないとき' do
+        it 'Rallyの投稿に失敗するとミッション1は達成されない' do
+          sign_in(@user)
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission1.mission.description)
+          find('a', text: '投稿する').click
+          find('a', text: '新規投稿').click
+          fill_in 'rally_title', with: ''
+          find('input[name="publish"]').click
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission1.mission.description)
+        end
+        it 'Rallyを下書きに保存してもミッション1は達成されない' do
+          sign_in(@user)
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission1.mission.description)
+          find('a', text: '投稿する').click
+          find('a', text: '新規投稿').click
+          fill_in 'rally_title', with: @rally.title
+          fill_in 'rally_abstract', with: @rally.abstract
+          fill_in 'rally_conclusion', with: @rally.conclusion
+          fill_in 'rally_opinion', with: @rally.opinion
+          fill_in 'rally_url', with: @rally.url
+          find('input[name="save_as_draft"]').click
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission1.mission.description)
+        end
+      end
+    end
+    describe 'ミッション機能-5' do
+      context 'ミッション達成されるとき' do
+        it 'Rallyが下書きに保存されるとミッション5が達成される' do
+          sign_in(@user)
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission5.mission.description)
+          find('a', text: '投稿する').click
+          find('a', text: '新規投稿').click
+          fill_in 'rally_title', with: @rally.title
+          fill_in 'rally_abstract', with: @rally.abstract
+          fill_in 'rally_conclusion', with: @rally.conclusion
+          fill_in 'rally_opinion', with: @rally.opinion
+          fill_in 'rally_url', with: @rally.url
+          find('input[name="save_as_draft"]').click
+          find('a', text: 'マイページ').click
+          expect(page).to have_no_content(@user_mission5.mission.description)
+        end
+        it 'Rallyが投稿されてもミッション5は達成される' do
+          sign_in(@user)
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission5.mission.description)
+          find('a', text: '投稿する').click
+          find('a', text: '新規投稿').click
+          fill_in 'rally_title', with: @rally.title
+          fill_in 'rally_abstract', with: @rally.abstract
+          fill_in 'rally_conclusion', with: @rally.conclusion
+          fill_in 'rally_opinion', with: @rally.opinion
+          fill_in 'rally_url', with: @rally.url
+          find('input[name="publish"]').click
+          find('a', text: 'マイページ').click
+          expect(page).to have_no_content(@user_mission5.mission.description)
+        end
+      end
+      context 'ミッション達成されないとき' do
+        it 'Rallyの下書き保存に失敗するとミッション5は達成されない' do
+          sign_in(@user)
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission5.mission.description)
+          find('a', text: '投稿する').click
+          find('a', text: '新規投稿').click
+          fill_in 'rally_title', with: ''
+          find('input[name="save_as_draft"]').click
+          find('a', text: 'マイページ').click
+          expect(page).to have_content(@user_mission5.mission.description)
+        end
+      end
+    end
   end
 end
 
@@ -64,6 +160,7 @@ RSpec.describe '閲覧・コメント機能', type: :system do
     @user = FactoryBot.create(:user)
     @rally = FactoryBot.create(:rally, draft: false)
     @comment = FactoryBot.build(:comment)
+    @user_mission2 = UserMission.create(user_id: @user.id, mission_id: 2, completed: false)
   end
 
   describe '投稿済みrallyの閲覧' do
@@ -117,6 +214,28 @@ RSpec.describe '閲覧・コメント機能', type: :system do
       end
     end
   end
+  describe 'ミッション機能-2' do
+    context 'ミッションが達成されるとき' do
+      it 'コメントを投稿するとミッション2が達成される' do
+        sign_in(@user)
+        find('a', text: @rally.title).click
+        fill_in 'comment_content', with: @comment.content
+        find('input[name="commit"]').click
+        find('a', text: 'マイページ').click
+        expect(page).to have_no_content(@user_mission2.mission.description)
+      end
+    end
+    context 'ミッションが達成されないとき' do
+      it 'コメントの投稿に失敗するとミッション2は達成されない' do
+        sign_in(@user)
+        find('a', text: @rally.title).click
+        fill_in 'comment_content', with: ''
+        find('input[name="commit"]').click
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission2.mission.description)
+      end
+    end
+  end
 end
 
 RSpec.describe '編集・削除機能', type: :system do
@@ -124,6 +243,8 @@ RSpec.describe '編集・削除機能', type: :system do
     @user = FactoryBot.create(:user)
     @user2 = FactoryBot.create(:user)
     @rally = FactoryBot.create(:rally, draft: false, user_id: @user.id)
+    @user_mission1 = UserMission.create(user_id: @user.id, mission_id: 1, completed: false)
+    @user_mission5 = UserMission.create(user_id: @user.id, mission_id: 5, completed: false)
   end
 
   describe 'rally編集機能' do
@@ -174,6 +295,84 @@ RSpec.describe '編集・削除機能', type: :system do
         sign_in(@user2)
         find('a', text: @rally.title).click
         expect(page).to have_no_content('編集する')
+      end
+    end
+  end
+  describe 'ミッション機能-1' do
+    context 'ミッション達成されるとき' do
+      it 'Rallyが投稿されるとミッション1が達成される' do
+        sign_in(@user)
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission1.mission.description)
+        find('a', text: @rally.title).click
+        find('a', text: '編集する').click
+        fill_in 'rally_title', with: 'test'
+        find('input[name="publish"]').click
+        find('a', text: 'マイページ').click
+        expect(page).to have_no_content(@user_mission1.mission.description)
+      end
+    end
+    context 'ミッション達成されないとき' do
+      it 'Rallyの投稿に失敗するとミッション1は達成されない' do
+        sign_in(@user)
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission1.mission.description)
+        find('a', text: @rally.title).click
+        find('a', text: '編集する').click
+        fill_in 'rally_title', with: ''
+        find('input[name="publish"]').click
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission1.mission.description)
+      end
+      it 'Rallyを下書きに保存してもミッション1は達成されない' do
+        sign_in(@user)
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission1.mission.description)
+        find('a', text: @rally.title).click
+        find('a', text: '編集する').click
+        fill_in 'rally_title', with: 'test'
+        find('input[name="save_as_draft"]').click
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission1.mission.description)
+      end
+    end
+  end
+  describe 'ミッション機能-5' do
+    context 'ミッション達成されるとき' do
+      it 'Rallyが下書きに保存されるとミッション5が達成される' do
+        sign_in(@user)
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission5.mission.description)
+        find('a', text: @rally.title).click
+        find('a', text: '編集する').click
+        fill_in 'rally_title', with: 'test'
+        find('input[name="save_as_draft"]').click
+        find('a', text: 'マイページ').click
+        expect(page).to have_no_content(@user_mission5.mission.description)
+      end
+      it 'Rallyが投稿されてもミッション5は達成される' do
+        sign_in(@user)
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission5.mission.description)
+        find('a', text: @rally.title).click
+        find('a', text: '編集する').click
+        fill_in 'rally_title', with: 'test'
+        find('input[name="publish"]').click
+        find('a', text: 'マイページ').click
+        expect(page).to have_no_content(@user_mission5.mission.description)
+      end
+    end
+    context 'ミッション達成されないとき' do
+      it 'Rallyの下書き保存に失敗するとミッション5は達成されない' do
+        sign_in(@user)
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission5.mission.description)
+        find('a', text: @rally.title).click
+        find('a', text: '編集する').click
+        fill_in 'rally_title', with: ''
+        find('input[name="save_as_draft"]').click
+        find('a', text: 'マイページ').click
+        expect(page).to have_content(@user_mission5.mission.description)
       end
     end
   end

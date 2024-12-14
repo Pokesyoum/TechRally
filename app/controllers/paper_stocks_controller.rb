@@ -8,7 +8,9 @@ class PaperStocksController < ApplicationController
   def create
     @user = current_user
     mission = UserMission.find_by(user_id: current_user.id, mission_id: 4, completed: false)
-    paper_stock = PaperStock.create(paper_stock_params)
+    paper_stock = PaperStock.new(paper_stock_params)
+    return unless paper_stock.save
+
     mission.update(completed: true) if mission
     redirect_to paper_stock_path(@user)
   end

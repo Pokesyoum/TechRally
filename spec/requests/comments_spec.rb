@@ -5,6 +5,7 @@ RSpec.describe CommentsController, type: :request do
   before do
     @user = FactoryBot.create(:user)
     @rally = FactoryBot.create(:rally, draft: false)
+    @user_mission2 = UserMission.create(user_id: @user.id, mission_id: 2, completed: false)
     sign_in @user
   end
 
@@ -28,6 +29,18 @@ RSpec.describe CommentsController, type: :request do
           post rally_comments_path(@rally), params: { comment: { content: '', user_id: @user.id, rally_id: @rally.id } }
         end.not_to change(Comment, :count)
       end
+    end
+  end
+
+  describe 'mission1' do
+    it 'マイページにリクエストするとレスポンスにミッション2が存在する' do
+      get user_path(@user)
+      expect(response.body).to include(@user_mission2.mission.description)
+    end
+    it 'コメントを投稿するとcompletedがtrueになり、ミッション2はマイページに存在しなくなる' do
+      post rally_comments_path(@rally), params: { comment: { content: 'test', user_id: @user.id, rally_id: @rally.id } }
+      get user_path(@user)
+      expect(response.body).not_to include(@user_mission2.mission.description)
     end
   end
 end

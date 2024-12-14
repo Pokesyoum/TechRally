@@ -6,6 +6,7 @@ RSpec.describe PaperStocksController, type: :request do
     @user = FactoryBot.create(:user)
     @rally = FactoryBot.create(:rally, draft: false)
     @paper_stock = FactoryBot.create(:paper_stock, user_id: @user.id)
+    @user_mission4 = UserMission.create(user_id: @user.id, mission_id: 4, completed: false)
     sign_in @user
   end
 
@@ -48,6 +49,18 @@ RSpec.describe PaperStocksController, type: :request do
           post paper_stocks_path(@user), params: { paper_stock: { outline: '', user_id: @user.id } }
         end.not_to change(PaperStock, :count)
       end
+    end
+  end
+
+  describe 'mission4' do
+    it 'マイページにリクエストするとレスポンスにミッション4が存在する' do
+      get user_path(@user)
+      expect(response.body).to include(@user_mission4.mission.description)
+    end
+    it 'look_for_paperを投稿するとcompletedがtrueになり、ミッション4はマイページに存在しなくなる' do
+      post paper_stocks_path(@user), params: { paper_stock: { outline: 'test', paper_url: 'test', user_id: @user.id } }
+      get user_path(@user)
+      expect(response.body).not_to include(@user_mission4.mission.description)
     end
   end
 end

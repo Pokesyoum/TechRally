@@ -6,6 +6,8 @@ describe RalliesController, type: :request do
     @user = FactoryBot.create(:user)
     @rally = FactoryBot.create(:rally, method: Faker::Lorem.sentence, user_id: @user.id, draft: false)
     @comment = FactoryBot.create(:comment, rally_id: @rally.id)
+    @user_mission1 = UserMission.create(user_id: @user.id, mission_id: 1, completed: false)
+    @user_mission5 = UserMission.create(user_id: @user.id, mission_id: 5, completed: false)
     sign_in @user
   end
 
@@ -156,6 +158,29 @@ describe RalliesController, type: :request do
     it 'rankingアクションにリクエストすると正常にレスポンスが返ってくる' do
       get ranking_rallies_path(@user)
       expect(response.status).to eq 200
+    end
+  end
+
+  describe 'mission1' do
+    it 'マイページにリクエストするとレスポンスにミッション1が存在する' do
+      get user_path(@user)
+      expect(response.body).to include(@user_mission1.mission.description)
+    end
+    it 'Rallyを投稿するとcompletedがtrueになり、ミッション1はマイページに存在しなくなる' do
+      post rallies_path, params: { rally: @rally.attributes, publish: true }
+      get user_path(@user)
+      expect(response.body).not_to include(@user_mission1.mission.description)
+    end
+  end
+  describe 'mission5' do
+    it 'マイページにリクエストするとレスポンスにミッション5が存在する' do
+      get user_path(@user)
+      expect(response.body).to include(@user_mission5.mission.description)
+    end
+    it 'Rallyを投稿するとcompletedがtrueになり、ミッション5はマイページに存在しなくなる' do
+      put rally_path(@rally), params: { rally: @rally.attributes, publish: true }
+      get user_path(@user)
+      expect(response.body).not_to include(@user_mission5.mission.description)
     end
   end
 end

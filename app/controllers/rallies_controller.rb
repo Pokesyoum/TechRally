@@ -21,12 +21,24 @@ class RalliesController < ApplicationController
 
     @rally = Rally.new(rally_params)
 
-    if @rally.save
-      mission = UserMission.find_by(user_id: current_user.id, mission_id: 1, completed: false)
-      mission.update(completed: true) if mission
-      redirect_to rally_lists_rallies_path
-    else
-      render :new, status: :unprocessable_entity
+    if params[:rally][:draft] == true
+      if @rally.save
+        mission = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
+        mission.update(completed: true) if mission
+        redirect_to rally_lists_rallies_path
+      else
+        render :new, status: :unprocessable_entity
+      end
+    elsif params[:rally][:draft] == false
+      if @rally.save
+        mission1 = UserMission.find_by(user_id: current_user.id, mission_id: 1, completed: false)
+        mission1.update(completed: true) if mission1
+        mission5 = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
+        mission5.update(completed: true) if mission5
+        redirect_to rally_lists_rallies_path
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
@@ -47,12 +59,24 @@ class RalliesController < ApplicationController
       params[:rally][:draft] = false
     end
 
-    if @rally.update(rally_params)
-      mission = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
-      mission.update(completed: true) if mission
-      redirect_to rally_lists_rallies_path
-    else
-      render :edit, status: :unprocessable_entity
+    if params[:rally][:draft] == true
+      if @rally.update(rally_params)
+        mission = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
+        mission.update(completed: true) if mission
+        redirect_to rally_lists_rallies_path
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    elsif params[:rally][:draft] == false
+      if @rally.update(rally_params)
+        mission1 = UserMission.find_by(user_id: current_user.id, mission_id: 1, completed: false)
+        mission1.update(completed: true) if mission1
+        mission5 = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
+        mission5.update(completed: true) if mission5
+        redirect_to rally_lists_rallies_path
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 

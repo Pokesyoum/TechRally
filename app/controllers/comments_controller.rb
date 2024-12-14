@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
   def create
-    comment = Comment.create(comment_params)
+    comment = Comment.new(comment_params)
+    return unless comment.save
+
+    mission = UserMission.find_by(user_id: current_user.id, mission_id: 2, completed: false)
+    mission.update(completed: true) if mission
     redirect_to "/rallies/#{comment.rally.id}"
   end
 
