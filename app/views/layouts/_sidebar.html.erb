@@ -4,16 +4,16 @@
       <%= link_to "トップページ", root_path, class: "menu-items" %>
     </li>
     <li class="menu-items">
-      <%= link_to "マイページ", user_path(@user), class: "menu-items" %>
+      <%= link_to "マイページ", user_path(current_user), class: "menu-items" %>
     </li>
     <li class="menu-items">
-      <%= link_to "探したい論文", look_for_paper_path(@user), class: "menu-items" %>
+      <%= link_to "探したい論文", look_for_paper_path(current_user), class: "menu-items" %>
     </li>
     <li class="menu-items">
-      <%= link_to "論文ストック", paper_stock_path(@user), class: "menu-items" %>
+      <%= link_to "論文ストック", paper_stock_path(current_user), class: "menu-items" %>
     </li>
     <li class="menu-items">
-      <%= link_to "投稿する", rally_lists_rallies_path(@user), class: "menu-items" %>
+      <%= link_to "投稿する", rally_lists_rallies_path(current_user), class: "menu-items" %>
     </li>
     <li class="menu-items">
       <%= link_to "ランキング", ranking_rallies_path, class: "menu-items" %>

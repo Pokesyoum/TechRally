@@ -1,8 +1,7 @@
 class RalliesController < ApplicationController
-  before_action :set_rally, only: [:show, :edit]
-  before_action :move_to_index, only: :edit
   before_action :authenticate_user!, only: [:index, :new, :edit, :destroy]
-  before_action :set_user
+  before_action :set_rally, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: :edit
 
   def index
     @rallies = Rally.where(draft: false).order(created_at: :desc)
@@ -13,33 +12,8 @@ class RalliesController < ApplicationController
   end
 
   def create
-    if params[:save_as_draft]
-      params[:rally][:draft] = true
-    elsif params[:publish]
-      params[:rally][:draft] = false
-    end
-
     @rally = Rally.new(rally_params)
-
-    if params[:rally][:draft] == true
-      if @rally.save
-        mission = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
-        mission.update(completed: true) if mission
-        redirect_to rally_lists_rallies_path
-      else
-        render :new, status: :unprocessable_entity
-      end
-    elsif params[:rally][:draft] == false
-      if @rally.save
-        mission1 = UserMission.find_by(user_id: current_user.id, mission_id: 1, completed: false)
-        mission1.update(completed: true) if mission1
-        mission5 = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
-        mission5.update(completed: true) if mission5
-        redirect_to rally_lists_rallies_path
-      else
-        render :new, status: :unprocessable_entity
-      end
-    end
+    rally_save(@rally)
   end
 
   def show
@@ -51,43 +25,16 @@ class RalliesController < ApplicationController
   end
 
   def update
-    @rally = Rally.find(params[:id])
-
-    if params[:save_as_draft]
-      params[:rally][:draft] = true
-    elsif params[:publish]
-      params[:rally][:draft] = false
-    end
-
-    if params[:rally][:draft] == true
-      if @rally.update(rally_params)
-        mission = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
-        mission.update(completed: true) if mission
-        redirect_to rally_lists_rallies_path
-      else
-        render :edit, status: :unprocessable_entity
-      end
-    elsif params[:rally][:draft] == false
-      if @rally.update(rally_params)
-        mission1 = UserMission.find_by(user_id: current_user.id, mission_id: 1, completed: false)
-        mission1.update(completed: true) if mission1
-        mission5 = UserMission.find_by(user_id: current_user.id, mission_id: 5, completed: false)
-        mission5.update(completed: true) if mission5
-        redirect_to rally_lists_rallies_path
-      else
-        render :edit, status: :unprocessable_entity
-      end
-    end
+    rally_save(@rally, update: true)
   end
 
   def destroy
-    rally = Rally.find(params[:id])
-    rally.destroy
+    @rally.destroy
     redirect_to rally_lists_rallies_path
   end
 
   def rally_lists
-    @rallies = @user.rallies
+    @rallies = current_user.rallies
   end
 
   def ranking
@@ -138,7 +85,26 @@ class RalliesController < ApplicationController
     redirect_to action: :index
   end
 
-  def set_user
-    @user = current_user
+  def rally_save(rally, update: false)
+    if params[:save_as_draft]
+      rally.draft = true
+    elsif params[:publish]
+      rally.draft = false
+    end
+
+    if update ? rally.update(rally_params) : rally.save
+      update_user_missions(rally)
+      redirect_to rally_lists_rallies_path
+    else
+      render (update ? :edit : :new), status: :unprocessable_entity
+    end
+  end
+
+  def update_user_missions(rally)
+    mission_ids = rally.draft ? [5] : [1, 5]
+    mission_ids.each do |mission_id|
+      mission = UserMission.find_by(user_id: current_user.id, mission_id:, completed: false)
+      mission.update(completed: true) if mission
+    end
   end
 end
