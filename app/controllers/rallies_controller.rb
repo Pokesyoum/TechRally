@@ -38,34 +38,12 @@ class RalliesController < ApplicationController
   end
 
   def ranking
-    @rally_top_users = Rally.select('user_id, COUNT(user_id) AS user_count')
-                            .group(:user_id)
-                            .order('user_count DESC')
-                            .limit(3)
-    @monthly_rally_top_users = Rally.select('user_id, COUNT(user_id) AS user_count')
-                                    .where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_month, Time.now.end_of_month)
-                                    .group(:user_id)
-                                    .order('user_count DESC')
-                                    .limit(3)
-    @comment_top_users = Comment.select('user_id, COUNT(user_id) AS user_count')
-                                .group(:user_id)
-                                .order('user_count DESC')
-                                .limit(3)
-    @monthly_comment_top_users = Comment.select('user_id, COUNT(user_id) AS user_count')
-                                        .where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_month, Time.now.end_of_month)
-                                        .group(:user_id)
-                                        .order('user_count DESC')
-                                        .limit(3)
-    @mission_top_users = UserMission.select('user_id, COUNT(user_id) AS user_count')
-                                    .where(completed: true)
-                                    .group(:user_id)
-                                    .order('user_count DESC')
-                                    .limit(3)
-    @monthly_mission_top_users = UserMission.select('user_id, COUNT(user_id) AS user_count')
-                                            .where('completed = ? AND created_at >= ? AND created_at <= ?', true, Time.now.beginning_of_month, Time.now.end_of_month)
-                                            .group(:user_id)
-                                            .order('user_count DESC')
-                                            .limit(3)
+    @rally_top_users = Rally.top_users
+    @monthly_rally_top_users = Rally.monthly_top_users
+    @comment_top_users = Comment.top_users
+    @monthly_comment_top_users = Comment.monthly_top_users
+    @mission_top_users = UserMission.top_users
+    @monthly_mission_top_users = UserMission.monthly_top_users
   end
 
   private
