@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: :show
   def show
-    @user = current_user
-    @rallies = @user.rallies
-    @user_missions = UserMission.where(user_id: current_user.id, completed: false)
+    @rallies = current_user.rallies
+    @user_missions = current_user.user_missions.where(completed: false)
   end
 end

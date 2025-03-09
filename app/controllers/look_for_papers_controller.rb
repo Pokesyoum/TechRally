@@ -7,11 +7,11 @@ class LookForPapersController < ApplicationController
 
   def create
     @user = current_user
-    mission = UserMission.find_by(user_id: current_user.id, mission_id: 3, completed: false)
     look_for_paper = LookForPaper.new(look_for_paper_params)
+
     return unless look_for_paper.save
 
-    mission.update(completed: true) if mission
+    user_mission_update
     redirect_to look_for_paper_path(@user)
   end
 
@@ -19,5 +19,10 @@ class LookForPapersController < ApplicationController
 
   def look_for_paper_params
     params.require(:look_for_paper).permit(:look_for_paper, :journal, :search_word).merge(user_id: current_user.id)
+  end
+
+  def user_mission_update
+    mission = UserMission.find_by(user_id: current_user.id, mission_id: 3, completed: false)
+    mission.update(completed: true) if mission
   end
 end
