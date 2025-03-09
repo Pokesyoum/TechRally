@@ -27,7 +27,7 @@ env :PATH, ENV['PATH']
 job_type :rbenv_runner, %q!eval "$(rbenv init -)"; cd :path && RAILS_ENV=:environment bundle exec bin/rails runner -e :environment ':task' :output!
 
 every 1.day at: '0:00 am' do
-  rbenv_runner "User.assign_missions"
+  rbenv_runner "MissionAssigner.assign_missions"
 end
 
 # 開発環境ではcrontab -eでproductionをdevelopmentにするか、データベースをmySQLにすることで動作を確認できた
